@@ -35,30 +35,51 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
         </div>
 
-        <p class="book-contact">Prefer email? <a href="mailto:hello@prefera.dev">hello@prefera.dev</a></p>
+        <p class="book-contact">Prefer email? <a href="mailto:info@prefera.dev">info@prefera.dev</a></p>
       </div>
 
       <div class="book-embed">
         <!-- Cal.com embed -->
         <div class="cal-wrapper" id="cal-inline"></div>
         <script is:inline>
-          (function() {
-            const script = document.createElement('script');
-            script.src = 'https://app.cal.com/embed/embed.js';
-            script.async = true;
-            script.onload = function() {
-              Cal("init", {origin:"https://cal.com"});
-              Cal("inline", {
-                elementOrSelector: "#cal-inline",
-                calLink: "prefera/audit",
-                layout: "month_view",
-                config: {
-                  theme: "light"
+          (function (C, A, L) {
+            let p = function (a, ar) { a.q.push(ar); };
+            let d = C.document;
+            C.Cal = C.Cal || function () {
+              let cal = C.Cal;
+              let ar = arguments;
+              if (!cal.loaded) {
+                cal.ns = {};
+                cal.q = cal.q || [];
+                d.head.appendChild(d.createElement("script")).src = A;
+                cal.loaded = true;
+              }
+              if (ar[0] === L) {
+                const api = function () { p(api, arguments); };
+                const namespace = ar[1];
+                api.q = api.q || [];
+                if (typeof namespace === "string") {
+                  cal.ns[namespace] = cal.ns[namespace] || api;
+                  p(cal.ns[namespace], ar);
+                  p(cal, ["initNamespace", namespace]);
+                } else {
+                  p(cal, ar);
                 }
-              });
+                return;
+              }
+              p(cal, ar);
             };
-            document.head.appendChild(script);
-          })();
+          })(window, "https://app.cal.com/embed/embed.js", "init");
+
+          Cal("init", { origin: "https://cal.com" });
+          Cal("inline", {
+            elementOrSelector: "#cal-inline",
+            calLink: "prefera/audit",
+            layout: "month_view",
+            config: {
+              theme: "light"
+            }
+          });
         </script>
       </div>
     </div>
