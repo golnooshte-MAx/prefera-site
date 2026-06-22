@@ -4,42 +4,53 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout title="Book a free audit — Prefera" description="Book a free 15-minute visibility audit. We scan Google, Maps, ChatGPT, and Perplexity. You get a scorecard and a fix list. No commitment.">
   <main class="book-page">
-    <div class="book-inner">
-      <div class="book-content">
-        <a href="/" class="book-back">← Back to prefera.dev</a>
-        <span class="book-eyebrow">FREE VISIBILITY AUDIT</span>
-        <h1 class="book-title">See where you stand.</h1>
-        <p class="book-desc">15 minutes. No sales pitch. No pressure. We walk through your visibility across Google, Maps, ChatGPT, and Perplexity, and show you exactly what to fix.</p>
+    <header class="book-top">
+      <a href="/" class="book-logo">prefera<span class="logo-dot">.</span></a>
+      <a href="/" class="book-home">Home</a>
+    </header>
 
+    <div class="book-inner">
+      <!-- LEFT: copy -->
+      <div class="book-content">
+        <div class="book-eyebrow">
+          <span class="eyebrow-dash"></span>
+          BOOK A FREE AUDIT
+        </div>
+
+        <h1 class="book-title"><span class="title-sans">Book a </span><span class="title-serif">free visibility audit.</span></h1>
+
+        <p class="book-desc">No pitch. No pressure. We scan your online presence, you get a clear report.</p>
+
+        <div class="book-how-label">HOW IT WORKS</div>
         <div class="book-steps">
           <div class="book-step">
             <span class="book-step-num">1</span>
-            <div>
-              <strong>Pick a time</strong>
-              <p>Choose a slot that works for you.</p>
-            </div>
+            <p><strong>Pick a time.</strong> Calendar invite sent.</p>
           </div>
           <div class="book-step">
             <span class="book-step-num">2</span>
-            <div>
-              <strong>We audit</strong>
-              <p>We scan your business across 5 channels before the call.</p>
-            </div>
+            <p><strong>We audit.</strong> Full scan of your visibility in 48 hours.</p>
           </div>
           <div class="book-step">
             <span class="book-step-num">3</span>
-            <div>
-              <strong>You decide</strong>
-              <p>Get your scorecard and fix list. No strings attached.</p>
-            </div>
+            <p><strong>You decide.</strong> No commitment. No follow-up spam.</p>
           </div>
         </div>
 
-        <p class="book-contact">Prefer email? <a href="mailto:info@prefera.dev">info@prefera.dev</a></p>
+        <div class="book-checks">
+          <span class="book-check"><span class="check-icon">✓</span>Free</span>
+          <span class="book-check"><span class="check-icon">✓</span>15 min, exactly</span>
+          <span class="book-check"><span class="check-icon">✓</span>No sales pitch</span>
+        </div>
+
+        <div class="book-email">
+          <div class="book-email-label">PREFER EMAIL?</div>
+          <a href="mailto:info@prefera.dev" class="book-email-link">info@prefera.dev →</a>
+        </div>
       </div>
 
+      <!-- RIGHT: Cal.com embed (dark theme, plum accent) -->
       <div class="book-embed">
-        <!-- Cal.com embed -->
         <div class="cal-wrapper" id="cal-inline"></div>
         <script is:inline>
           (function (C, A, L) {
@@ -76,9 +87,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             elementOrSelector: "#cal-inline",
             calLink: "prefera/audit",
             layout: "month_view",
-            config: {
-              theme: "light"
-            }
+            config: { theme: "dark" }
+          });
+          Cal("ui", {
+            theme: "dark",
+            styles: { branding: { brandColor: "#8B7FD4" } },
+            hideEventTypeDetails: true,
+            layout: "month_view"
           });
         </script>
       </div>
@@ -86,164 +101,215 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </main>
 
   <style>
+    /* Warm cream at top fading into deep plum at the bottom (Smoova-style) */
     .book-page {
       min-height: 100vh;
-      background: #FAFAFA;
+      background: linear-gradient(180deg, #F4F2EE 0%, #EFE9F1 35%, #6a5690 68%, #2f2348 100%);
       position: relative;
       overflow: hidden;
     }
 
-    .book-page::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(ellipse 80% 50% at 30% 40%, rgba(196,181,253,0.15) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
+    /* ---- Top bar ---- */
+    .book-top {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.75rem 1.5rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
+    .book-logo {
+      font-family: 'Fraunces Variable', 'Fraunces', Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #1a1a1f;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .logo-dot { color: #5F4B8B; }
+    .book-home {
+      font-family: 'Inter Variable', sans-serif;
+      font-size: 13px;
+      color: #6b6470;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .book-home:hover { color: #5F4B8B; }
 
     .book-inner {
       position: relative;
       z-index: 1;
-      max-width: 1140px;
+      max-width: 1180px;
       margin: 0 auto;
-      padding: 3rem 1.5rem;
+      padding: 3.5rem 1.5rem 5rem;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      grid-template-columns: minmax(0, 38fr) minmax(0, 62fr);
+      gap: 2.5rem;
       align-items: start;
-      min-height: 100vh;
     }
 
-    .book-back {
-      font-family: 'Inter Variable', sans-serif;
-      font-size: 13px;
-      color: #5F4B8B;
-      text-decoration: none;
-      display: inline-block;
-      margin-bottom: 2rem;
-      transition: opacity 0.3s;
-    }
-
-    .book-back:hover {
-      opacity: 0.7;
-    }
-
+    /* ---- Left column ---- */
     .book-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: #5F4B8B;
-      display: block;
-      margin-bottom: 1rem;
+      color: #8a7fa0;
+      margin-bottom: 1.25rem;
+    }
+    .eyebrow-dash {
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: #c9bcd8;
     }
 
     .book-title {
-      font-family: 'Fraunces Variable', serif;
-      font-weight: 400;
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(2.1rem, 4.2vw, 2.9rem);
+      line-height: 1.08;
       color: #1a1a1f;
-      line-height: 1.1;
-      margin-bottom: 1rem;
+      margin: 0 0 1rem;
+    }
+    .title-sans {
+      font-family: 'Inter Variable', sans-serif;
+      font-weight: 700;
+    }
+    .title-serif {
+      font-family: 'Fraunces Variable', 'Fraunces', Georgia, serif;
+      font-weight: 400;
+      font-style: italic;
     }
 
     .book-desc {
       font-family: 'Inter Variable', sans-serif;
-      font-size: 15px;
-      color: #6b7280;
-      line-height: 1.7;
-      max-width: 420px;
-      margin-bottom: 2.5rem;
+      font-size: 1.05rem;
+      color: #6b6470;
+      line-height: 1.6;
+      max-width: 400px;
+      margin-bottom: 2.25rem;
     }
 
+    .book-how-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #8a7fa0;
+      margin-bottom: 1rem;
+    }
     .book-steps {
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
-      margin-bottom: 2.5rem;
+      gap: 0.9rem;
+      margin-bottom: 1.75rem;
     }
-
     .book-step {
       display: flex;
       align-items: flex-start;
-      gap: 1rem;
+      gap: 0.75rem;
     }
-
     .book-step-num {
-      width: 28px;
-      height: 28px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
-      background: rgba(95, 75, 139, 0.1);
-      color: #5F4B8B;
-      font-family: 'JetBrains Mono', monospace;
+      background: #5F4B8B;
+      color: #fff;
+      font-family: 'Inter Variable', sans-serif;
       font-size: 12px;
       font-weight: 600;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      margin-top: 2px;
+      margin-top: 1px;
     }
-
-    .book-step strong {
-      font-family: 'Inter Variable', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      color: #1a1a1f;
-      display: block;
-      margin-bottom: 0.15rem;
-    }
-
     .book-step p {
       font-family: 'Inter Variable', sans-serif;
-      font-size: 13px;
-      color: #6b7280;
+      font-size: 14px;
+      color: #6b6470;
       line-height: 1.5;
       margin: 0;
     }
+    .book-step strong {
+      font-weight: 600;
+      color: #1a1a1f;
+    }
 
-    .book-contact {
+    /* Checkmark row */
+    .book-checks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 1.75rem;
+    }
+    .book-check {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
       font-family: 'Inter Variable', sans-serif;
-      font-size: 13px;
-      color: #9ca3af;
+      font-size: 0.9rem;
+      color: #6b6470;
     }
-
-    .book-contact a {
+    .check-icon {
       color: #5F4B8B;
-      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    /* PREFER EMAIL — subtle outlined box on the cream background */
+    .book-email {
+      display: inline-block;
+      border: 1px solid rgba(95, 75, 139, 0.22);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      background: rgba(255, 255, 255, 0.4);
+    }
+    .book-email-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #8a7fa0;
+      margin-bottom: 0.4rem;
+    }
+    .book-email-link {
+      font-family: 'Inter Variable', sans-serif;
+      font-size: 15px;
       font-weight: 500;
+      color: #1a1a1f;
+      text-decoration: none;
+      transition: color 0.3s;
     }
+    .book-email-link:hover { color: #5F4B8B; }
 
-    .book-contact a:hover {
-      text-decoration: underline;
-    }
-
+    /* ---- Right column: dark Cal embed with plum ambient glow ---- */
     .book-embed {
-      background: white;
-      border: 1px solid rgba(0,0,0,0.06);
+      background: #16131f;
       border-radius: 16px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-      min-height: 600px;
+      padding: 0.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 30px 80px rgba(95, 75, 139, 0.35), 0 4px 24px rgba(0, 0, 0, 0.25);
+      min-height: 540px;
     }
-
     .cal-wrapper {
       width: 100%;
-      min-height: 550px;
+      min-height: 520px;
       overflow: hidden;
+      border-radius: 12px;
     }
 
     @media (max-width: 768px) {
       .book-inner {
         grid-template-columns: 1fr;
         gap: 2rem;
-        padding: 2rem 1.5rem;
+        padding: 2.5rem 1.5rem 4rem;
       }
-
-      .book-embed {
-        min-height: 500px;
-      }
+      .book-embed { min-height: 500px; }
     }
   </style>
 </BaseLayout>
