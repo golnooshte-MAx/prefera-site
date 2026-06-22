@@ -9,6 +9,8 @@ const siteUrl = "https://prefera.dev";
 const canonical = new URL(Astro.url.pathname, siteUrl).href;
 const isHome = Astro.url.pathname === "/";
 const ogImage = `${siteUrl}/og-image.png`;
+// Freshness signal for AI/search. Bump when content materially changes.
+const lastUpdated = "2026-06-22";
 
 // FAQ structured data only belongs on the page that actually shows the FAQ.
 const faqPage = {
@@ -31,6 +33,16 @@ const jsonLd = {
       "url": siteUrl,
       "name": "Prefera",
       "description": description
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${canonical}#webpage`,
+      "url": canonical,
+      "name": title,
+      "description": description,
+      "isPartOf": { "@id": `${siteUrl}/#website` },
+      "datePublished": "2026-06-22",
+      "dateModified": lastUpdated
     },
     {
       "@type": "Organization",
