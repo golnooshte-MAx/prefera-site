@@ -1,0 +1,267 @@
+---
+---
+<section id="approach" class="process" data-scroll-bg="process">
+  <div class="process-glow" aria-hidden="true"></div>
+  <div class="process-inner">
+    <span class="eyebrow">HOW IT WORKS</span>
+    <h2>Audit. Fix. Maintain.</h2>
+
+    <div class="steps-container">
+      <div class="steps-line" aria-hidden="true"></div>
+
+      <div class="step fade-up" data-step="1">
+        <div class="step-circle">
+          <div class="circle-bg"></div>
+          <div class="circle-ring"></div>
+          <div class="circle-content">
+            <span class="step-number">01</span>
+            <svg class="step-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <h3 class="step-title">Visibility audit</h3>
+            <p class="step-desc">We scan Google, Maps, ChatGPT, and Perplexity. You get a scorecard and a fix list. 48 hours, free.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step fade-up" data-step="2">
+        <div class="step-circle">
+          <div class="circle-bg"></div>
+          <div class="circle-ring"></div>
+          <div class="circle-content">
+            <span class="step-number">02</span>
+            <svg class="step-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            <h3 class="step-title">Foundation setup</h3>
+            <p class="step-desc">We fix or rebuild your site if needed, structure it for local search, optimize your GBP, and make your business readable by AI. Two to four weeks.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step fade-up" data-step="3">
+        <div class="step-circle">
+          <div class="circle-bg"></div>
+          <div class="circle-ring"></div>
+          <div class="circle-content">
+            <span class="step-number">03</span>
+            <svg class="step-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+            <h3 class="step-title">Monthly upkeep</h3>
+            <p class="step-desc">Posts, reviews, ranking tracking, AI monitoring, and a monthly call. We report what moved.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Section id is #approach (preserved for the nav anchor + scroll-bg system) */
+  #approach {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    background: transparent;
+    padding: 6rem 1.5rem;
+  }
+
+  /* Decorative lavender-plum glow behind all content */
+  .process-glow {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: radial-gradient(ellipse 90% 60% at 50% 45%, rgba(196, 181, 253, 0.25) 0%, rgba(95, 75, 139, 0.08) 45%, transparent 75%);
+  }
+
+  .process-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1140px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .process-inner .eyebrow {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #5F4B8B;
+  }
+  .process-inner h2 {
+    font-family: 'Fraunces Variable', 'Fraunces', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    line-height: 1.15;
+    color: #1a1a1f;
+    margin-top: 1rem;
+  }
+
+  /* ---- Steps layout ---- */
+  .steps-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    margin-top: 4rem;
+    position: relative;
+  }
+  .steps-line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 55%;
+    height: 1px;
+    background-image: repeating-linear-gradient(to right, rgba(95,75,139,0.2) 0px, rgba(95,75,139,0.2) 6px, transparent 6px, transparent 14px);
+    z-index: 0;
+  }
+  .step {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ---- Circle ---- */
+  .step-circle {
+    width: clamp(260px, 26vw, 340px);
+    height: clamp(260px, 26vw, 340px);
+    position: relative;
+    cursor: default;
+  }
+  .circle-bg {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(95, 75, 139, 0.1);
+    box-shadow: 0 4px 24px rgba(95, 75, 139, 0.06);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .circle-ring {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(95, 75, 139, 0.12);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: ring-rotate 30s linear infinite;
+  }
+  @keyframes ring-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .circle-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    padding: 2.25rem;
+    text-align: center;
+    gap: 0;
+  }
+  .step-number {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: #5F4B8B;
+    font-weight: 500;
+    opacity: 0.6;
+    margin-bottom: 0.4rem;
+  }
+  .step-icon {
+    color: #5F4B8B;
+    opacity: 0.5;
+    margin-bottom: 0.7rem;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .step-title {
+    font-family: 'Fraunces Variable', 'Fraunces', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(1.2rem, 1.5vw, 1.45rem);
+    color: #1a1a1f;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+  .step-desc {
+    font-family: 'Inter Variable', sans-serif;
+    font-size: 14px;
+    color: #4b5563;
+    line-height: 1.55;
+    text-align: center;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  /* ---- Hover states (desktop pointers only) ---- */
+  @media (hover: hover) {
+    .step-circle:hover .circle-bg {
+      background: rgba(255, 255, 255, 0.92);
+      border-color: rgba(95, 75, 139, 0.2);
+      box-shadow: 0 8px 40px rgba(95, 75, 139, 0.14), 0 0 0 1px rgba(95, 75, 139, 0.06);
+      transform: scale(1.06);
+    }
+    .step-circle:hover .circle-ring {
+      border-color: rgba(95, 75, 139, 0.25);
+      inset: -8px;
+      animation-duration: 12s;
+    }
+    .step-circle:hover .step-icon {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+  }
+
+  /* ---- Entrance animation ---- */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  .fade-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .step[data-step="1"].is-visible { transition-delay: 0s; }
+  .step[data-step="2"].is-visible { transition-delay: 0.15s; }
+  .step[data-step="3"].is-visible { transition-delay: 0.3s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .circle-ring { animation: none; }
+    .fade-up { opacity: 1; transform: none; }
+    .fade-up.is-visible { transition: none; }
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 768px) {
+    .steps-container {
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .steps-line {
+      display: none;
+    }
+    .step-circle {
+      width: 290px;
+      height: 290px;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    const steps = document.querySelectorAll('#approach .fade-up');
+    if (!steps.length) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    steps.forEach(step => observer.observe(step));
+  })();
+</script>

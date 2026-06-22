@@ -1,0 +1,182 @@
+---
+---
+<nav id="main-nav" class="nav nav-dark">
+  <div class="nav-inner container">
+    <a href="/" class="nav-logo">prefera</a>
+    <div class="nav-links">
+      <a href="#services" class="rot-link"><span class="rot"><span class="rot-front">Services</span><span class="rot-back">Services</span></span></a>
+      <a href="#approach" class="rot-link"><span class="rot"><span class="rot-front">Approach</span><span class="rot-back">Approach</span></span></a>
+      <a href="#proof" class="rot-link"><span class="rot"><span class="rot-front">Case Studies</span><span class="rot-back">Case Studies</span></span></a>
+    </div>
+    <a href="/book" class="nav-cta rot-link"><span class="rot"><span class="rot-front">Book a free audit</span><span class="rot-back">Book a free audit</span></span></a>
+  </div>
+</nav>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  const darkBgKeys = ['hero', 'reveal', 'stats', 'cta', 'footer'];
+  const sections = document.querySelectorAll('[data-scroll-bg]');
+
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const bgKey = entry.target.getAttribute('data-scroll-bg');
+        if (darkBgKeys.includes(bgKey)) {
+          nav.classList.add('nav-dark');
+          nav.classList.remove('nav-light');
+        } else {
+          nav.classList.add('nav-light');
+          nav.classList.remove('nav-dark');
+        }
+      }
+    });
+  }, {
+    threshold: 0,
+    rootMargin: '-10% 0px -85% 0px'
+  });
+
+  sections.forEach(section => navObserver.observe(section));
+
+  // Initial state: hero is dark
+  nav.classList.add('nav-dark');
+</script>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    transition: background 400ms ease, border-color 400ms ease;
+  }
+  .nav-light a, .nav-light .nav-logo { transition: color 400ms ease; }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    gap: 2rem;
+  }
+  .nav-logo {
+    font-family: var(--font-sans);
+    font-size: 1.375rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 0.5rem;
+    margin-left: auto;
+    margin-right: 1.5rem;
+  }
+  .nav-links a {
+    position: relative;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
+    transition: color 200ms ease;
+  }
+  /* button-shape that fades + scales in on hover */
+  .nav-links a::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 300ms ease, transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .nav-links a:hover::before { opacity: 1; transform: scale(1); }
+  .nav.nav-dark .nav-links a::before { background: rgba(255,255,255,0.12); }
+  .nav.nav-light .nav-links a::before { background: var(--accent-soft); }
+  .nav-cta {
+    display: inline-block;
+    border-radius: 50px;
+    padding: 0.5rem 1.25rem;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    overflow: hidden;
+    transition: background 300ms ease, border-color 300ms ease, color 300ms ease, box-shadow 300ms ease;
+  }
+  /* Dark/transparent mode (over hero): glass feel */
+  .nav.nav-dark .nav-cta {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+  }
+  .nav.nav-dark .nav-cta:hover {
+    background: rgba(255,255,255,0.18);
+    border-color: rgba(255,255,255,0.35);
+  }
+
+  /* Smooth vertical roll on hover (links + CTA) — label slides up and out
+     while an identical copy rolls up into place. No rotation, no shake. */
+  .rot {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    line-height: 1.25;
+    vertical-align: bottom;
+  }
+  .rot-front, .rot-back {
+    display: block;
+    transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+  .rot-back {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateY(100%);
+  }
+  .rot-link:hover .rot-front { transform: translateY(-100%); }
+  .rot-link:hover .rot-back { transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    .rot-front, .rot-back { transition: none; }
+    .rot-back { transform: translateY(100%); }
+  }
+
+  /* Dark state (over hero) */
+  .nav.nav-dark {
+    background: transparent;
+    border-bottom: 1px solid transparent;
+  }
+  .nav.nav-dark .nav-logo { color: #fff; }
+  .nav.nav-dark .nav-links a { color: rgba(255,255,255,0.7); }
+  .nav.nav-dark .nav-links a:hover { color: #fff; }
+
+  /* Light state (scrolled past hero) */
+  .nav.nav-light {
+    background: rgba(250,250,250,0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav.nav-light .nav-logo { color: var(--text-primary); }
+  .nav.nav-light .nav-links a { color: var(--text-secondary); }
+  .nav.nav-light .nav-links a:hover { color: var(--text-primary); }
+  /* Light/solid mode (scrolled): solid plum pill */
+  .nav.nav-light .nav-cta {
+    background: #5F4B8B;
+    border: 1px solid #5F4B8B;
+    color: #fff;
+    border-radius: 50px;
+    box-shadow: 0 1px 2px rgba(95,75,139,0.15), 0 4px 16px rgba(95,75,139,0.2);
+  }
+  .nav.nav-light .nav-cta:hover {
+    background: #4A3A6E;
+    border-color: #4A3A6E;
+  }
+
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+  }
+</style>

@@ -1,0 +1,296 @@
+---
+// Horizontal venetian-blind slats: full-width bars stacked over a line,
+// alternating slide direction (left / right) to reveal the text behind.
+const slats = (n) =>
+  Array.from({ length: n }, (_, i) => ({
+    top: (i * 100) / n,
+    h: 100 / n + 1,
+    dir: i % 2 === 0 ? 'l' : 'r',
+  }));
+---
+<section class="cta-section" data-scroll-bg="cta">
+  <h2 class="blinds">Still invisible?
+  </h2>
+  <p class="blinds blinds-delay" data-blinds>
+    <span class="blinds-line"><span class="blinds-mask"><span class="blinds-fill">Book a free 15-minute audit. See exactly where you stand</span>{slats(3).map((s) => (<span class={`blinds-slat slat-${s.dir}`} style={`top:${s.top}%;height:${s.h}%`}></span>))}</span></span>
+    <span class="blinds-line"><span class="blinds-mask"><span class="blinds-fill">across Google, ChatGPT, and Perplexity.</span>{slats(3).map((s) => (<span class={`blinds-slat slat-${s.dir}`} style={`top:${s.top}%;height:${s.h}%`}></span>))}</span></span>
+  </p>
+  <a href="/book" class="cta-button">Book a free audit</a>
+</section>
+
+<footer class="footer" data-scroll-bg="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <span class="footer-logo">prefera</span>
+        <p class="footer-desc">Local visibility. AI readiness. No fluff.</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-label">Contact</p>
+        <a href="mailto:hello@prefera.dev" class="footer-link">hello@prefera.dev</a>
+        <a href="/book" class="footer-link">Book a call</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-label">Legal</p>
+        <a href="/privacy" class="footer-link">Privacy</a>
+        <a href="/terms" class="footer-link">Terms</a>
+        <span class="footer-link">KvK: [number]</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Prefera. Built in Utrecht.</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .cta-section {
+    position: relative;
+    z-index: 1;
+    padding: 12rem 2rem;
+    text-align: center;
+    color: #fff;
+    background: transparent;
+  }
+  /* Soft plum glow that fades to nothing at the edges, so the page body
+     color (which animates in via the scroll-bg system) shows through and
+     the boundary into this section morphs smoothly — no hard seam. */
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(110% 120% at 50% 30%, rgba(60,43,98,0.55) 0%, rgba(34,25,56,0.25) 38%, transparent 66%);
+  }
+
+  .blinds .blinds-line { display: block; line-height: 1.15; }
+  .blinds .blinds-mask {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+  }
+  .blinds .blinds-fill { display: inline-block; }
+
+  /* Full-width venetian slats; alternating slats slide left / right to reveal text */
+  .blinds-slat {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background: var(--accent);
+    pointer-events: none;
+    transition: transform 700ms cubic-bezier(0.76, 0, 0.24, 1);
+    will-change: transform;
+  }
+  .slat-l { transform: translateX(0); }
+  .slat-r { transform: translateX(0); }
+  .blinds.is-visible .slat-l { transform: translateX(-101%); }
+  .blinds.is-visible .slat-r { transform: translateX(101%); }
+
+  .blinds-delay .blinds-slat { transition-delay: 150ms; }
+  .blinds-delay-2 .blinds-slat { transition-delay: 300ms; }
+
+  .blinds h2, h2.blinds { font-family: "Fraunces Variable", serif; font-weight: 400; font-size: clamp(3rem, 7vw, 6rem); margin: 0 0 1.5rem; }
+  .blinds p, p.blinds { font-family: "Inter Variable", sans-serif; font-size: 1.125rem; color: rgba(255,255,255,0.7); margin: 0 0 2.5rem; max-width: 36rem; margin-inline: auto; }
+
+  /* ---- Shiny animated CTA (same effect as the hero button) ---- */
+  .cta-button {
+    --shiny-bg: rgba(95, 75, 139, 0.35);
+    --shiny-bg-subtle: rgba(30, 28, 35, 0.8);
+    --shiny-fg: #ffffff;
+    --shiny-highlight: #5F4B8B;
+    --shiny-highlight-subtle: #8B7FD4;
+    --shiny-duration: 3s;
+    --shiny-shadow-size: 2px;
+    --shiny-transition: 800ms cubic-bezier(0.25, 1, 0.5, 1);
+
+    isolation: isolate;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    outline-offset: 4px;
+    padding: 1.15rem 3rem;
+    font-family: "Inter Variable", sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    border: 1px solid transparent;
+    border-radius: 50px;
+    color: var(--shiny-fg);
+    text-decoration: none;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background:
+      linear-gradient(var(--shiny-bg), var(--shiny-bg)) padding-box,
+      conic-gradient(
+        from calc(var(--gradient-angle) - var(--gradient-angle-offset)),
+        transparent,
+        var(--shiny-highlight) var(--gradient-percent),
+        var(--gradient-shine) calc(var(--gradient-percent) * 2),
+        var(--shiny-highlight) calc(var(--gradient-percent) * 3),
+        transparent calc(var(--gradient-percent) * 4)
+      ) border-box;
+    box-shadow: inset 0 0 0 1px var(--shiny-bg-subtle), 0 0 20px rgba(95, 75, 139, 0.25), 0 0 60px rgba(95, 75, 139, 0.1);
+    transition: var(--shiny-transition);
+    transition-property: --gradient-angle-offset, --gradient-percent, --gradient-shine;
+    animation: cta-pulse 3s ease-in-out infinite, shiny-rotate var(--shiny-duration) linear infinite;
+  }
+
+  /* Dot pattern overlay */
+  .cta-button::before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    width: calc(100% - var(--shiny-shadow-size) * 3);
+    height: calc(100% - var(--shiny-shadow-size) * 3);
+    background: radial-gradient(
+      circle at 2px 2px,
+      white calc(2px / 4),
+      transparent 0
+    ) padding-box;
+    background-size: 4px 4px;
+    background-repeat: space;
+    mask-image: conic-gradient(
+      from calc(var(--gradient-angle) + 45deg),
+      black,
+      transparent 10% 90%,
+      black
+    );
+    border-radius: inherit;
+    opacity: 0.3;
+    z-index: -1;
+    animation: shiny-rotate var(--shiny-duration) linear infinite;
+  }
+
+  /* Inner shimmer glow */
+  .cta-button::after {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    width: 100%;
+    aspect-ratio: 1;
+    background: linear-gradient(
+      -50deg,
+      transparent,
+      var(--shiny-highlight),
+      transparent
+    );
+    mask-image: radial-gradient(circle at bottom, transparent 40%, black);
+    opacity: 0.5;
+    z-index: -1;
+    animation: shiny-shimmer calc(var(--shiny-duration) * 1.5) linear infinite;
+  }
+
+  .cta-button:active {
+    translate: 0 1px;
+  }
+
+  .cta-button:hover,
+  .cta-button:focus-visible {
+    --gradient-percent: 20%;
+    --gradient-angle-offset: 95deg;
+    --gradient-shine: var(--shiny-highlight-subtle);
+    animation: shiny-rotate var(--shiny-duration) linear infinite;
+    box-shadow: inset 0 0 0 1px var(--shiny-bg-subtle), 0 0 30px rgba(95, 75, 139, 0.4), 0 0 80px rgba(95, 75, 139, 0.15);
+  }
+
+  .cta-button:hover::before,
+  .cta-button:focus-visible::before {
+    opacity: 0.5;
+  }
+
+  @keyframes shiny-rotate {
+    to {
+      --gradient-angle: 360deg;
+    }
+  }
+
+  @keyframes shiny-shimmer {
+    to {
+      rotate: 360deg;
+    }
+  }
+
+  /* Subtle "breathing" glow so the eye catches the button at rest */
+  @keyframes cta-pulse {
+    0%, 100% { box-shadow: inset 0 0 0 1px var(--shiny-bg-subtle), 0 0 20px rgba(95, 75, 139, 0.25), 0 0 60px rgba(95, 75, 139, 0.1); }
+    50% { box-shadow: inset 0 0 0 1px var(--shiny-bg-subtle), 0 0 28px rgba(95, 75, 139, 0.35), 0 0 80px rgba(95, 75, 139, 0.15); }
+  }
+
+  .footer {
+    position: relative;
+    z-index: 1;
+    background: var(--bg-dark);
+    padding: 4rem 0 2rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-logo {
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: #fff;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+  .footer-desc {
+    color: rgba(255,255,255,0.45);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    max-width: 280px;
+  }
+  .footer-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 1rem;
+  }
+  .footer-link {
+    display: block;
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+    transition: color 200ms ease;
+  }
+  .footer-link:hover { color: #fff; }
+  .footer-bottom {
+    padding-top: 1.5rem;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.25);
+  }
+
+  @media (max-width: 640px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>
+
+<script>
+  const blindsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        blindsObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.35 });
+  document.querySelectorAll('[data-blinds]').forEach(el => blindsObserver.observe(el));
+</script>

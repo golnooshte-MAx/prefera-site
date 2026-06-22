@@ -1,0 +1,228 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Book a free audit — Prefera" description="Book a free 15-minute visibility audit. We scan Google, Maps, ChatGPT, and Perplexity. You get a scorecard and a fix list. No commitment.">
+  <main class="book-page">
+    <div class="book-inner">
+      <div class="book-content">
+        <a href="/" class="book-back">← Back to prefera.dev</a>
+        <span class="book-eyebrow">FREE VISIBILITY AUDIT</span>
+        <h1 class="book-title">See where you stand.</h1>
+        <p class="book-desc">15 minutes. No sales pitch. No pressure. We walk through your visibility across Google, Maps, ChatGPT, and Perplexity, and show you exactly what to fix.</p>
+
+        <div class="book-steps">
+          <div class="book-step">
+            <span class="book-step-num">1</span>
+            <div>
+              <strong>Pick a time</strong>
+              <p>Choose a slot that works for you.</p>
+            </div>
+          </div>
+          <div class="book-step">
+            <span class="book-step-num">2</span>
+            <div>
+              <strong>We audit</strong>
+              <p>We scan your business across 5 channels before the call.</p>
+            </div>
+          </div>
+          <div class="book-step">
+            <span class="book-step-num">3</span>
+            <div>
+              <strong>You decide</strong>
+              <p>Get your scorecard and fix list. No strings attached.</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="book-contact">Prefer email? <a href="mailto:hello@prefera.dev">hello@prefera.dev</a></p>
+      </div>
+
+      <div class="book-embed">
+        <!-- Cal.com embed -->
+        <div class="cal-wrapper" id="cal-inline"></div>
+        <script is:inline>
+          (function() {
+            const script = document.createElement('script');
+            script.src = 'https://app.cal.com/embed/embed.js';
+            script.async = true;
+            script.onload = function() {
+              Cal("init", {origin:"https://cal.com"});
+              Cal("inline", {
+                elementOrSelector: "#cal-inline",
+                calLink: "prefera/audit",
+                layout: "month_view",
+                config: {
+                  theme: "light"
+                }
+              });
+            };
+            document.head.appendChild(script);
+          })();
+        </script>
+      </div>
+    </div>
+  </main>
+
+  <style>
+    .book-page {
+      min-height: 100vh;
+      background: #FAFAFA;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .book-page::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(ellipse 80% 50% at 30% 40%, rgba(196,181,253,0.15) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .book-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      min-height: 100vh;
+    }
+
+    .book-back {
+      font-family: 'Inter Variable', sans-serif;
+      font-size: 13px;
+      color: #5F4B8B;
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 2rem;
+      transition: opacity 0.3s;
+    }
+
+    .book-back:hover {
+      opacity: 0.7;
+    }
+
+    .book-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #5F4B8B;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .book-title {
+      font-family: 'Fraunces Variable', serif;
+      font-weight: 400;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: #1a1a1f;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .book-desc {
+      font-family: 'Inter Variable', sans-serif;
+      font-size: 15px;
+      color: #6b7280;
+      line-height: 1.7;
+      max-width: 420px;
+      margin-bottom: 2.5rem;
+    }
+
+    .book-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .book-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .book-step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(95, 75, 139, 0.1);
+      color: #5F4B8B;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .book-step strong {
+      font-family: 'Inter Variable', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a1a1f;
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+
+    .book-step p {
+      font-family: 'Inter Variable', sans-serif;
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .book-contact {
+      font-family: 'Inter Variable', sans-serif;
+      font-size: 13px;
+      color: #9ca3af;
+    }
+
+    .book-contact a {
+      color: #5F4B8B;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .book-contact a:hover {
+      text-decoration: underline;
+    }
+
+    .book-embed {
+      background: white;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      min-height: 600px;
+    }
+
+    .cal-wrapper {
+      width: 100%;
+      min-height: 550px;
+      overflow: hidden;
+    }
+
+    @media (max-width: 768px) {
+      .book-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem 1.5rem;
+      }
+
+      .book-embed {
+        min-height: 500px;
+      }
+    }
+  </style>
+</BaseLayout>

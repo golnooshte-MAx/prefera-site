@@ -1,0 +1,227 @@
+---
+const faqs = [
+  {
+    q: "How fast will I see results?",
+    a: "Google Business Profile improvements show up in the map pack within 2 to 4 weeks. Local SEO ranking gains for service-area keywords take 8 to 12 weeks. AI search citations (ChatGPT, Perplexity) can appear within days once we structure your content correctly.",
+  },
+  {
+    q: "Do I have to sign a long contract?",
+    a: "No. Month-to-month. Cancel anytime with 30 days notice. The audit is a one-time fee, the retainer is rolling. If we are not earning our keep, you should not be paying us.",
+  },
+  {
+    q: "I already have a website. Do I need a new one?",
+    a: "Almost never. We work with what you have. The fixes happen on Google Business Profile, your existing pages, structured data, and AI-readable content. A rebuild is the last resort, not the first move.",
+  },
+  {
+    q: "Do you work with businesses outside the Netherlands?",
+    a: "Yes. Local SEO and GBP optimization are location-agnostic. Currently serving NL, Belgium, and English-speaking clients across Europe and North America. AI visibility work is global by definition.",
+  },
+  {
+    q: "How do you measure AI search visibility?",
+    a: "We track citations across ChatGPT, Perplexity, Google AI Overviews, and Claude for a defined set of queries relevant to your business. You get a monthly visibility score and the actual prompts where you appear or do not. No black-box dashboards.",
+  },
+];
+---
+<section id="faq" class="faq" data-scroll-bg="faq">
+  <!-- Decorative lavender glow (behind all content) -->
+  <div class="faq-glow" aria-hidden="true"></div>
+
+  <div class="faq-inner">
+    <div class="faq-left">
+      <p class="faq-eyebrow">FAQ</p>
+      <h2 class="faq-heading">Got questions?<br><em>Here's what most people ask.</em></h2>
+    </div>
+
+    <div class="faq-right">
+      {faqs.map((item, i) => (
+        <div class="faq-item" data-open={i === 0 ? "true" : "false"}>
+          <button
+            class="faq-trigger"
+            aria-expanded={i === 0 ? "true" : "false"}
+            aria-controls={`faq-panel-${i}`}
+          >
+            <span class="faq-question">{item.q}</span>
+            <span class="faq-icon" aria-label={i === 0 ? "Collapse answer" : "Expand answer"}>
+              <span class="faq-bar faq-bar-h"></span>
+              <span class="faq-bar faq-bar-v"></span>
+            </span>
+          </button>
+          <div class="faq-panel" id={`faq-panel-${i}`}>
+            <div class="faq-panel-inner">
+              <p>{item.a}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const items = Array.from(document.querySelectorAll('.faq-item'));
+  items.forEach((item) => {
+    const trigger = item.querySelector('.faq-trigger');
+    const icon = item.querySelector('.faq-icon');
+    trigger.addEventListener('click', () => {
+      const isOpen = item.getAttribute('data-open') === 'true';
+      items.forEach((other) => {
+        other.setAttribute('data-open', 'false');
+        other.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+        other.querySelector('.faq-icon').setAttribute('aria-label', 'Expand answer');
+      });
+      if (!isOpen) {
+        item.setAttribute('data-open', 'true');
+        trigger.setAttribute('aria-expanded', 'true');
+        icon.setAttribute('aria-label', 'Collapse answer');
+      }
+    });
+  });
+</script>
+
+<style>
+  .faq {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    padding: 120px 0;
+  }
+
+  /* Decorative lavender-plum glow: subtle, sits behind all content.
+     inset:0 so it stays within the section bounds; invisible on dark body. */
+  .faq-glow {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: radial-gradient(ellipse 90% 60% at 50% 45%, rgba(196, 181, 253, 0.25) 0%, rgba(95, 75, 139, 0.08) 45%, transparent 75%);
+  }
+
+  .faq-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  /* ---- Left column ---- */
+  .faq-left {
+    position: sticky;
+    top: 120px;
+    align-self: start;
+  }
+  .faq-eyebrow {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 12px;
+    color: #5F4B8B;
+    margin-bottom: 24px;
+  }
+  .faq-heading {
+    font-family: 'Fraunces Variable', 'Fraunces', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    line-height: 1.1;
+    color: #0C0C0E;
+    letter-spacing: -0.02em;
+    margin-bottom: 0;
+  }
+  .faq-heading em { font-style: italic; }
+
+  /* ---- Right column (accordion) ---- */
+  .faq-right {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .faq-item {
+    background: #FFFFFF;
+    border-radius: 16px;
+    border: 1px solid rgba(12, 12, 14, 0.06);
+    overflow: hidden;
+    transition: border-color 200ms ease;
+  }
+  .faq-item:hover { border-color: rgba(12, 12, 14, 0.12); }
+  .faq-item[data-open="true"] { border-color: rgba(95, 75, 139, 0.25); }
+
+  .faq-trigger {
+    width: 100%;
+    padding: 24px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    text-align: left;
+    font-family: var(--font-sans);
+  }
+  .faq-question {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 17px;
+    color: #0C0C0E;
+    line-height: 1.4;
+  }
+  .faq-icon {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+  .faq-bar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 2px;
+    background: #5F4B8B;
+    border-radius: 1px;
+    transform: translate(-50%, -50%);
+  }
+  .faq-bar-v {
+    transform: translate(-50%, -50%) rotate(90deg);
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .faq-item[data-open="true"] .faq-bar-v {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  .faq-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .faq-item[data-open="true"] .faq-panel {
+    grid-template-rows: 1fr;
+  }
+  .faq-panel-inner {
+    overflow: hidden;
+  }
+  .faq-panel-inner p {
+    margin: 0;
+    padding: 0 28px 24px 28px;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.6;
+    color: #3A3A3A;
+  }
+
+  @media (max-width: 900px) {
+    .faq-inner {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .faq-left {
+      position: static;
+      top: auto;
+    }
+    .faq-cta { width: 100%; }
+  }
+</style>
