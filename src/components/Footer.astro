@@ -15,7 +15,7 @@ const slats = (n) =>
     <span class="blinds-line"><span class="blinds-mask"><span class="blinds-fill">Book a free 15-minute audit. See exactly where you stand</span>{slats(3).map((s) => (<span class={`blinds-slat slat-${s.dir}`} style={`top:${s.top}%;height:${s.h}%`}></span>))}</span></span>
     <span class="blinds-line"><span class="blinds-mask"><span class="blinds-fill">across Google, ChatGPT, and Perplexity.</span>{slats(3).map((s) => (<span class={`blinds-slat slat-${s.dir}`} style={`top:${s.top}%;height:${s.h}%`}></span>))}</span></span>
   </p>
-  <a href="/book" class="cta-button">Book a free audit</a>
+  <a href="https://prefera.dev/book/?utm_source=website&utm_medium=cta&utm_campaign=footer-cta" class="cta-button">Book a free audit</a>
 </section>
 
 <footer class="footer" data-scroll-bg="footer">
@@ -23,18 +23,19 @@ const slats = (n) =>
     <div class="footer-grid">
       <div class="footer-col">
         <span class="footer-logo">prefera</span>
-        <p class="footer-desc">Local visibility. AI readiness. No fluff.</p>
+        <p class="footer-desc">AI visibility for aesthetic clinics.</p>
       </div>
       <div class="footer-col">
         <p class="footer-label">Contact</p>
         <a href="mailto:info@prefera.dev" class="footer-link">info@prefera.dev</a>
-        <a href="/book" class="footer-link">Book a call</a>
+        <a href="https://prefera.dev/book/?utm_source=website&utm_medium=cta&utm_campaign=footer-link" class="footer-link">Book a call</a>
+        <a href="/about/" class="footer-link">About</a>
+        <a href="/services/" class="footer-link">Services and pricing</a>
       </div>
       <div class="footer-col">
         <p class="footer-label">Legal</p>
-        <a href="/privacy" class="footer-link">Privacy</a>
-        <a href="/terms" class="footer-link">Terms</a>
-        <span class="footer-link">KvK: [number]</span>
+        <a href="/privacy/" class="footer-link">Privacy</a>
+        <a href="/terms/" class="footer-link">Terms</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -270,6 +271,7 @@ const slats = (n) =>
     text-decoration: none;
     margin-bottom: 0.5rem;
     transition: color 200ms ease;
+    padding: 0.5rem 0;
   }
   .footer-link:hover { color: #fff; }
   .footer-bottom {

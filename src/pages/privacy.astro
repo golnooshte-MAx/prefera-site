@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Privacy policy | Prefera"
+  description="How Prefera handles your data: no analytics tracking on this site, booking via Cal.com, and email used only to respond. Contact info@prefera.dev."
+>
+  <Nav />
+  <main id="main" class="legal-page">
+    <div class="legal-wrapper">
+      <h1>Privacy policy.</h1>
+
+      <p>Prefera (Utrecht, Netherlands) collects no analytics on this site. The booking page embeds Cal.com, which processes the data you enter under its own privacy policy.</p>
+
+      <p>Email sent to info@prefera.dev is used only to respond. No data is sold or shared.</p>
+
+      <p>Contact info@prefera.dev for any privacy question or deletion request.</p>
+
+      <p><em>Last updated July 2026</em></p>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .legal-page {
+    background: var(--bg-primary);
+    min-height: 100vh;
+    padding: 6rem 1.5rem;
+  }
+
+  .legal-wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-family: 'Fraunces Variable', 'Fraunces', Georgia, serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    line-height: 1.2;
+  }
+
+  p {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  em {
+    font-style: italic;
+    color: var(--text-tertiary);
+  }
+
+  @media (max-width: 640px) {
+    .legal-page {
+      padding: 3rem 1.5rem;
+    }
+  }
+</style>

@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Terms of service | Prefera"
+  description="Terms for working with Prefera: month-to-month engagements, 30 days notice to cancel, a free AI Visibility Read with no obligation, Dutch law."
+>
+  <Nav />
+  <main id="main" class="legal-page">
+    <div class="legal-wrapper">
+      <h1>Terms of service.</h1>
+
+      <p>Services are provided by Prefera, Utrecht, Netherlands.</p>
+
+      <p>Engagements are month-to-month, cancellable with 30 days notice.</p>
+
+      <p>The free AI Visibility Read carries no obligation.</p>
+
+      <p>No specific ranking or citation outcomes are guaranteed.</p>
+
+      <p>Dutch law applies.</p>
+
+      <p><em>Last updated July 2026</em></p>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .legal-page {
+    background: var(--bg-primary);
+    min-height: 100vh;
+    padding: 6rem 1.5rem;
+  }
+
+  .legal-wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-family: 'Fraunces Variable', 'Fraunces', Georgia, serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    line-height: 1.2;
+  }
+
+  p {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  em {
+    font-style: italic;
+    color: var(--text-tertiary);
+  }
+
+  @media (max-width: 640px) {
+    .legal-page {
+      padding: 3rem 1.5rem;
+    }
+  }
+</style>

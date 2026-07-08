@@ -4,11 +4,25 @@
   <div class="nav-inner container">
     <a href="/" class="nav-logo">prefera</a>
     <div class="nav-links">
-      <a href="#services" class="rot-link"><span class="rot"><span class="rot-front">Services</span><span class="rot-back">Services</span></span></a>
-      <a href="#approach" class="rot-link"><span class="rot"><span class="rot-front">Approach</span><span class="rot-back">Approach</span></span></a>
-      <a href="#proof" class="rot-link"><span class="rot"><span class="rot-front">Case Studies</span><span class="rot-back">Case Studies</span></span></a>
+      <a href="/#services" class="rot-link"><span class="rot"><span class="rot-front">Services</span><span class="rot-back">Services</span></span></a>
+      <a href="/#approach" class="rot-link"><span class="rot"><span class="rot-front">Approach</span><span class="rot-back">Approach</span></span></a>
+      <a href="/#faq" class="rot-link"><span class="rot"><span class="rot-front">FAQ</span><span class="rot-back">FAQ</span></span></a>
+      <a href="/about/" class="rot-link"><span class="rot"><span class="rot-front">About</span><span class="rot-back">About</span></span></a>
     </div>
-    <a href="/book" class="nav-cta rot-link"><span class="rot"><span class="rot-front">Book a free audit</span><span class="rot-back">Book a free audit</span></span></a>
+    <div class="nav-burger-container">
+      <button class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="nav-burger-bar"></span>
+        <span class="nav-burger-bar"></span>
+        <span class="nav-burger-bar"></span>
+      </button>
+    </div>
+    <div id="mobile-menu" class="mobile-menu" hidden>
+      <a href="/#services" class="mobile-menu-link">Services</a>
+      <a href="/#approach" class="mobile-menu-link">Approach</a>
+      <a href="/#faq" class="mobile-menu-link">FAQ</a>
+      <a href="/about/" class="mobile-menu-link">About</a>
+    </div>
+    <a href="https://prefera.dev/book/?utm_source=website&utm_medium=cta&utm_campaign=nav" class="nav-cta rot-link"><span class="rot"><span class="rot-front">Book a free audit</span><span class="rot-back">Book a free audit</span></span></a>
   </div>
 </nav>
 
@@ -37,8 +51,35 @@
 
   sections.forEach(section => navObserver.observe(section));
 
-  // Initial state: hero is dark
-  nav.classList.add('nav-dark');
+  // Initial state: dark only over the homepage hero. Standalone pages
+  // (about, services, privacy, terms) open on light content, and their
+  // dark footer sections are handled by the observer once scrolled to.
+  if (document.querySelector('.hero')) {
+    nav.classList.add('nav-dark');
+  } else {
+    nav.classList.remove('nav-dark');
+    nav.classList.add('nav-light');
+  }
+
+  // Mobile menu toggle
+  const burger = document.querySelector('.nav-burger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (burger && mobileMenu) {
+    burger.addEventListener('click', () => {
+      const isOpen = burger.getAttribute('aria-expanded') === 'true';
+      burger.setAttribute('aria-expanded', !isOpen);
+      mobileMenu.hidden = isOpen;
+    });
+
+    // Close menu when a link is clicked
+    const links = mobileMenu.querySelectorAll('.mobile-menu-link');
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        burger.setAttribute('aria-expanded', 'false');
+        mobileMenu.hidden = true;
+      });
+    });
+  }
 </script>
 
 <style>
@@ -96,7 +137,7 @@
   .nav-cta {
     display: inline-block;
     border-radius: 50px;
-    padding: 0.5rem 1.25rem;
+    padding: 0.625rem 1.25rem;
     font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.01em;
@@ -176,7 +217,96 @@
     border-color: #4A3A6E;
   }
 
+  /* Mobile hamburger button */
+  .nav-burger-container {
+    display: none;
+    margin-left: auto;
+  }
+  .nav-burger {
+    all: unset;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+  .nav.nav-dark .nav-burger { color: #fff; }
+  .nav.nav-light .nav-burger { color: var(--text-primary); }
+  .nav-burger-bar {
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: currentColor;
+    border-radius: 2px;
+    transition: transform 300ms ease, opacity 300ms ease;
+  }
+  .nav-burger-bar + .nav-burger-bar {
+    margin-top: 5px;
+  }
+  .nav-burger[aria-expanded="true"] .nav-burger-bar:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+  .nav-burger[aria-expanded="true"] .nav-burger-bar:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-burger[aria-expanded="true"] .nav-burger-bar:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  /* Mobile menu panel. Hidden by default: an explicit `display` would
+     override the `hidden` attribute, so only the open state sets flex,
+     and only at mobile widths (see the media query below). */
+  .mobile-menu {
+    display: none;
+    position: absolute;
+    top: 72px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: rgba(12, 12, 14, 0.97);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    z-index: 99;
+    flex-direction: column;
+  }
+  .mobile-menu-link {
+    display: block;
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition: color 200ms ease, background 200ms ease;
+  }
+  .mobile-menu-link:last-child {
+    border-bottom: none;
+  }
+  .mobile-menu-link:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .nav.nav-light .mobile-menu {
+    background: rgba(250, 250, 250, 0.97);
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+  }
+  .nav.nav-light .mobile-menu-link {
+    color: var(--text-primary);
+    border-bottom-color: rgba(0, 0, 0, 0.04);
+  }
+  .nav.nav-light .mobile-menu-link:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+
   @media (max-width: 640px) {
     .nav-links { display: none; }
+    .nav-burger-container { display: flex; }
+    .mobile-menu:not([hidden]) { display: flex; }
   }
 </style>

@@ -2,6 +2,8 @@
 dist/
 # generated types
 .astro/
+# cloudflare / wrangler
+.wrangler/
 # dependencies
 node_modules/
 # logs
@@ -12,6 +14,11 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+# social media working assets (not site content)
+ig/
+/prefera-carousel-sample.png
+/prefera-post01-cover-3D.png
+/prefera-post01-cover-LIGHT.png
 # macOS
 .DS_Store
 # editor
