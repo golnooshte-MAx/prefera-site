@@ -24,3 +24,6 @@ ig/
 # editor
 .vscode/
 .idea/
+
+# source photo, optimized copy lives in public/
+/src/Field_of_closed_buds_open_202607091330.jpeg

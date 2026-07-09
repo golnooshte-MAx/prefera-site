@@ -49,7 +49,7 @@ const bookUrl = 'https://prefera.dev/book/?utm_source=website&utm_medium=cta&utm
 
         <div class="hero-figure reveal reveal-d2">
           <div class="hero-mask">
-            <img src="/about-hero.jpg" alt="A clinician reading patient questions on a phone" loading="eager" width="1600" height="1067" />
+            <img src="/about-hero.jpg" alt="A single open tulip standing out in a field of closed buds" loading="eager" width="1400" height="782" />
           </div>
         </div>
 
@@ -280,16 +280,30 @@ const bookUrl = 'https://prefera.dev/book/?utm_source=website&utm_medium=cta&utm
   .intro { padding: 6.5rem 0 4.5rem; }
 
   .hero-figure { margin-bottom: 1rem; }
+  /* Fixed-ratio frame so the notched crop is predictable at every width.
+     Taller on mobile so the field reads; a wide banner on desktop. */
   .hero-mask {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
     clip-path: url(#clip-inverted);
     -webkit-clip-path: url(#clip-inverted);
+    overflow: hidden;
   }
   .hero-mask img {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    aspect-ratio: 100 / 40;
+    height: 100%;
+    /* Bias toward the standout bloom so it survives the crop */
     object-fit: cover;
+    object-position: 62% 60%;
     display: block;
     filter: brightness(0.94) saturate(0.85);
+  }
+  @media (min-width: 768px) {
+    .hero-mask { aspect-ratio: 5 / 2; }
+    .hero-mask img { object-position: center; }
   }
 
   .statsbar {
