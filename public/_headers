@@ -13,3 +13,6 @@
 
 /hero-bg.jpg
   Cache-Control: public, max-age=604800
+
+/about-hero.jpg
+  Cache-Control: public, max-age=604800

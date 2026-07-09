@@ -1,57 +1,77 @@
 ---
-import { faqs } from '../data/faqs.js';
+import { faqs, answerBlocks } from '../data/faqs.js';
+// One flat thread; the first VISIBLE_COUNT bubbles show by default and the
+// rest sit behind the "Read all FAQ" toggle, Smoova-style.
+const allFaqs = [...faqs, ...answerBlocks];
+const VISIBLE_COUNT = 6;
 ---
 <section id="faq" class="faq" data-scroll-bg="faq">
   <!-- Decorative lavender glow (behind all content) -->
   <div class="faq-glow" aria-hidden="true"></div>
 
   <div class="faq-inner">
-    <div class="faq-left">
-      <p class="faq-eyebrow">FAQ</p>
-      <h2 class="faq-heading">Got questions?<br><em>Here's what most people ask.</em></h2>
-    </div>
+    <h2 class="faq-heading">Questions clinic owners <em>actually ask</em><span class="faq-dot">.</span></h2>
+    <p class="faq-sub">Short answers to what clinics ask us most. Missing something? <a href="mailto:info@prefera.dev">Send us a message</a>.</p>
 
-    <div class="faq-right">
-      {faqs.map((item, i) => (
-        <div class="faq-item" data-open={i === 0 ? "true" : "false"}>
-          <button
-            class="faq-trigger"
-            aria-expanded={i === 0 ? "true" : "false"}
-            aria-controls={`faq-panel-${i}`}
-          >
-            <span class="faq-question">{item.q}</span>
-            <span class="faq-icon" aria-label={i === 0 ? "Collapse answer" : "Expand answer"}>
-              <span class="faq-bar faq-bar-h"></span>
-              <span class="faq-bar faq-bar-v"></span>
-            </span>
-          </button>
-          <div class="faq-panel" id={`faq-panel-${i}`}>
-            <div class="faq-panel-inner">
-              <p>{item.a}</p>
+    <div class="faq-thread" id="faq-thread">
+      {allFaqs.map((item, i) => {
+        const open = i === 0;
+        const extra = i >= VISIBLE_COUNT;
+        return (
+          <div class={extra ? 'faq-item faq-extra' : 'faq-item'} data-open={open ? 'true' : 'false'}>
+            <button class="faq-trigger" aria-expanded={open ? 'true' : 'false'} aria-controls={`faq-panel-${i}`}>
+              <span class="faq-bubble-q">{item.q}</span>
+              <span class="faq-toggle" aria-hidden="true">
+                <span class="faq-bar faq-bar-h"></span>
+                <span class="faq-bar faq-bar-v"></span>
+              </span>
+            </button>
+            <div class="faq-panel" id={`faq-panel-${i}`}>
+              <div class="faq-panel-inner">
+                <div class="faq-answer-row">
+                  <span class="faq-avatar" aria-hidden="true">p.</span>
+                  <div class="faq-bubble-a"><p>{item.a}</p></div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
+    </div>
+
+    <div class="faq-actions">
+      <button class="faq-btn faq-btn-outline" id="faq-readall" aria-expanded="false" aria-controls="faq-thread">Read all FAQ</button>
+      <a href="https://prefera.dev/book/?utm_source=website&utm_medium=cta&utm_campaign=faq" class="faq-btn faq-btn-solid">Book a free audit</a>
     </div>
   </div>
 </section>
 
 <script>
+  const readAll = document.getElementById('faq-readall');
+  const thread = document.getElementById('faq-thread');
+  if (readAll && thread) {
+    readAll.addEventListener('click', () => {
+      const expanded = thread.classList.toggle('expanded');
+      readAll.setAttribute('aria-expanded', String(expanded));
+      readAll.textContent = expanded ? 'Show less' : 'Read all FAQ';
+      if (!expanded) {
+        document.getElementById('faq').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
+
   const items = Array.from(document.querySelectorAll('.faq-item'));
   items.forEach((item) => {
     const trigger = item.querySelector('.faq-trigger');
-    const icon = item.querySelector('.faq-icon');
     trigger.addEventListener('click', () => {
       const isOpen = item.getAttribute('data-open') === 'true';
       items.forEach((other) => {
         other.setAttribute('data-open', 'false');
         other.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
-        other.querySelector('.faq-icon').setAttribute('aria-label', 'Expand answer');
       });
       if (!isOpen) {
         item.setAttribute('data-open', 'true');
         trigger.setAttribute('aria-expanded', 'true');
-        icon.setAttribute('aria-label', 'Collapse answer');
       }
     });
   });
@@ -61,121 +81,133 @@ import { faqs } from '../data/faqs.js';
   .faq {
     position: relative;
     z-index: 1;
-    background: transparent;
-    padding: 120px 0;
+    padding: 6rem 1.5rem 6.5rem;
   }
 
-  /* Decorative lavender-plum glow: subtle, sits behind all content.
-     inset:0 so it stays within the section bounds; invisible on dark body. */
   .faq-glow {
     position: absolute;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background-image: radial-gradient(ellipse 90% 60% at 50% 45%, rgba(196, 181, 253, 0.25) 0%, rgba(95, 75, 139, 0.08) 45%, transparent 75%);
+    background-image: radial-gradient(ellipse 70% 50% at 50% 20%, rgba(196, 181, 253, 0.14) 0%, transparent 70%);
   }
 
+  /* Dashed frame lines, Smoova-style */
   .faq-inner {
     position: relative;
     z-index: 1;
-    max-width: 1200px;
+    max-width: 880px;
     margin: 0 auto;
-    padding: 0 32px;
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 80px;
-    align-items: start;
   }
 
-  /* ---- Left column ---- */
-  .faq-left {
-    position: sticky;
-    top: 120px;
-    align-self: start;
-  }
-  .faq-eyebrow {
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    font-size: 12px;
-    color: #5F4B8B;
-    margin-bottom: 24px;
-  }
   .faq-heading {
     font-family: 'Fraunces Variable', 'Fraunces', Georgia, serif;
     font-weight: 400;
-    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-size: clamp(2.1rem, 5vw, 3.4rem);
     line-height: 1.1;
-    color: #0C0C0E;
     letter-spacing: -0.02em;
-    margin-bottom: 0;
+    color: #0C0C0E;
+    text-align: center;
+    margin: 0 0 1.25rem;
   }
   .faq-heading em { font-style: italic; }
+  .faq-dot { color: #5F4B8B; }
 
-  /* ---- Right column (accordion) ---- */
-  .faq-right {
+  .faq-sub {
+    font-family: 'Inter Variable', sans-serif;
+    font-size: 0.9875rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    text-align: center;
+    max-width: 44ch;
+    margin: 0 auto 3.5rem;
+  }
+  .faq-sub a {
+    color: #5F4B8B;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* ---- Chat thread ---- */
+  .faq-thread {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-  }
-  .faq-item {
-    background: #FFFFFF;
-    border-radius: 16px;
-    border: 1px solid rgba(12, 12, 14, 0.06);
-    overflow: hidden;
-    transition: border-color 200ms ease;
-  }
-  .faq-item:hover { border-color: rgba(12, 12, 14, 0.12); }
-  .faq-item[data-open="true"] { border-color: rgba(95, 75, 139, 0.25); }
-
-  .faq-trigger {
-    width: 100%;
-    padding: 24px 28px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     gap: 1rem;
+  }
+
+  /* Items past the fold stay hidden until "Read all FAQ" expands the thread */
+  .faq-item.faq-extra { display: none; }
+  .faq-thread.expanded .faq-item.faq-extra { display: block; }
+
+  /* Question row: a sent-message bubble with a +/× circle beside it.
+     Open items slide to the right like a message you just sent. */
+  .faq-trigger {
+    all: unset;
     cursor: pointer;
-    background: none;
-    border: none;
-    text-align: left;
-    font-family: var(--font-sans);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    justify-content: flex-start;
   }
-  .faq-question {
-    font-family: var(--font-sans);
+  .faq-item[data-open="true"] .faq-trigger {
+    justify-content: flex-end;
+  }
+
+  .faq-bubble-q {
+    background: #1A1A1F;
+    color: #fff;
+    font-family: 'Inter Variable', sans-serif;
+    font-size: 0.9875rem;
     font-weight: 500;
-    font-size: 17px;
-    color: #0C0C0E;
-    line-height: 1.4;
+    line-height: 1.45;
+    padding: 0.95rem 1.5rem;
+    border-radius: 26px;
+    text-align: left;
+    box-shadow: 0 2px 10px rgba(12, 12, 14, 0.12);
+    transition: background 0.3s ease;
   }
-  .faq-icon {
+  .faq-trigger:hover .faq-bubble-q {
+    background: #2A2A33;
+  }
+  .faq-item[data-open="true"] .faq-bubble-q {
+    background: #5F4B8B;
+  }
+
+  .faq-toggle {
     position: relative;
-    width: 24px;
-    height: 24px;
     flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(26, 26, 31, 0.18);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s ease;
+  }
+  .faq-trigger:hover .faq-toggle {
+    background: #fff;
   }
   .faq-bar {
     position: absolute;
     top: 50%;
     left: 50%;
     width: 14px;
-    height: 2px;
-    background: #5F4B8B;
-    border-radius: 1px;
-    transform: translate(-50%, -50%);
+    height: 1.5px;
+    background: #1A1A1F;
+    border-radius: 2px;
   }
-  .faq-bar-v {
-    transform: translate(-50%, -50%) rotate(90deg);
-    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .faq-item[data-open="true"] .faq-bar-v {
-    transform: translate(-50%, -50%) rotate(0deg);
+  .faq-bar-h { transform: translate(-50%, -50%); }
+  .faq-bar-v { transform: translate(-50%, -50%) rotate(90deg); }
+  /* + rotates into × when open */
+  .faq-item[data-open="true"] .faq-toggle {
+    transform: rotate(45deg);
   }
 
+  /* Answer: the studio replies in a light bubble with a monogram avatar */
   .faq-panel {
     display: grid;
     grid-template-rows: 0fr;
-    transition: grid-template-rows 400ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: grid-template-rows 420ms cubic-bezier(0.22, 1, 0.36, 1);
   }
   .faq-item[data-open="true"] .faq-panel {
     grid-template-rows: 1fr;
@@ -183,24 +215,105 @@ import { faqs } from '../data/faqs.js';
   .faq-panel-inner {
     overflow: hidden;
   }
-  .faq-panel-inner p {
+
+  .faq-answer-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    max-width: 92%;
+  }
+  .faq-avatar {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #5F4B8B;
+    color: #fff;
+    font-family: 'Fraunces Variable', 'Fraunces', Georgia, serif;
+    font-size: 0.9375rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 6px;
+  }
+  .faq-bubble-a {
+    background: #fff;
+    border-radius: 20px;
+    padding: 1.15rem 1.5rem;
+    box-shadow: 0 4px 20px rgba(12, 12, 14, 0.06);
+  }
+  .faq-bubble-a p {
+    font-family: 'Inter Variable', sans-serif;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
     margin: 0;
-    padding: 0 28px 24px 28px;
-    font-family: var(--font-sans);
-    font-size: 15px;
-    line-height: 1.6;
-    color: #3A3A3A;
   }
 
-  @media (max-width: 900px) {
+  /* ---- Closing actions ---- */
+  .faq-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 3.5rem;
+  }
+  .faq-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    font-family: 'Inter Variable', sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    padding: 0.7rem 1.6rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  }
+  .faq-btn-solid {
+    background: #5F4B8B;
+    color: #fff;
+    box-shadow: 0 1px 2px rgba(95, 75, 139, 0.15), 0 4px 16px rgba(95, 75, 139, 0.2);
+  }
+  .faq-btn-solid:hover { background: #4A3A6E; }
+  .faq-btn-outline {
+    border: 1px solid rgba(26, 26, 31, 0.2);
+    color: #1A1A1F;
+    background: rgba(255, 255, 255, 0.5);
+  }
+  .faq-btn-outline:hover { background: #fff; border-color: rgba(26, 26, 31, 0.35); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq-panel, .faq-toggle, .faq-bubble-q, .faq-btn { transition: none; }
+  }
+
+  @media (min-width: 900px) {
     .faq-inner {
-      grid-template-columns: 1fr;
-      gap: 48px;
+      border-left: 1px dashed rgba(26, 26, 31, 0.14);
+      border-right: 1px dashed rgba(26, 26, 31, 0.14);
+      padding: 0 3.5rem;
     }
-    .faq-left {
-      position: static;
-      top: auto;
+  }
+
+  @media (max-width: 640px) {
+    .faq {
+      padding: 4rem 1.25rem 4.5rem;
     }
-    .faq-cta { width: 100%; }
+    .faq-bubble-q {
+      font-size: 0.9375rem;
+      padding: 0.85rem 1.2rem;
+    }
+    .faq-toggle {
+      width: 38px;
+      height: 38px;
+    }
+    .faq-answer-row {
+      max-width: 100%;
+    }
   }
 </style>

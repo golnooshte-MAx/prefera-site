@@ -2,150 +2,544 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+
+const principles = [
+  {
+    lead: 'Evidence, not theatre.',
+    body: "We recommend only what the data actually supports. No invented uplift figures, no schema markup for its own sake, no Google-era SEO dressed up as an AI strategy. If a lever doesn't move AI citations, it doesn't go in your plan, and we'll tell you plainly where something is correlation and where it's cause.",
+  },
+  {
+    lead: 'Off-site is where AI answers are won.',
+    body: "Assistants don't read your homepage and decide you're the best. They read the rest of the web: your mentions, your reviews, whether your name shows up consistently and credibly everywhere that matters. That's the actual work, and almost nobody in aesthetics is doing it yet.",
+  },
+  {
+    lead: 'Aesthetic clinics, and nothing else.',
+    body: 'One vertical, on purpose. Not a generalist agency with a clinic tab. We know your treatments, your patient questions, your competitors, and exactly how an assistant decides which of you to name.',
+  },
+];
+
+const bookUrl = 'https://prefera.dev/book/?utm_source=website&utm_medium=cta&utm_campaign=about';
 ---
 
 <BaseLayout
-  title="About Golnoosh, founder of Prefera"
-  description="Prefera is a one-person AEO studio in Utrecht run by Golnoosh, helping aesthetic clinics in the UK and EU get recommended by AI assistants."
+  title="About Prefera, the AEO studio"
+  description="Prefera is an AEO studio in Utrecht helping aesthetic clinics across the UK, EU, US, and Canada get recommended by ChatGPT, Perplexity, and Gemini."
 >
   <Nav />
+
+  <!-- Clip path for the notched hero image -->
+  <svg width="0" height="0" style="position: absolute;" aria-hidden="true">
+    <defs>
+      <clipPath id="clip-inverted" clipPathUnits="objectBoundingBox">
+        <path d="M0.0998072 1H0.422076H0.749756C0.767072 1 0.774207 0.961783 0.77561 0.942675V0.807325C0.777053 0.743631 0.791844 0.731953 0.799059 0.734076H0.969813C0.996268 0.730255 1.00088 0.693206 0.999875 0.675159V0.0700637C0.999875 0.0254777 0.985045 0.00477707 0.977629 0H0.902473C0.854975 0 0.890448 0.138535 0.850165 0.138535H0.0204424C0.00408849 0.142357 0 0.180467 0 0.199045V0.410828C0 0.449045 0.0136283 0.46603 0.0204424 0.469745H0.0523086C0.0696245 0.471019 0.0735527 0.497877 0.0733523 0.511146V0.915605C0.0723903 0.983121 0.090588 1 0.0998072 1Z" />
+      </clipPath>
+    </defs>
+  </svg>
+
   <main id="main" class="about-page">
-    <div class="about-wrapper">
-      <h1>The person behind Prefera.</h1>
 
-      <p class="about-lead">Prefera is a one-person AEO studio in Utrecht, run by Golnoosh, a performance marketer with more than ten years across growth, paid search and social, and data analysis. She helps independent aesthetic clinics in the UK and EU become the answer AI assistants give.</p>
+    <!-- ===== Intro: image, stats, headline, copy + sticky card ===== -->
+    <section class="intro">
+      <div class="shell">
 
-      <h2>Background</h2>
+        <div class="topbar reveal">
+          <span class="star" aria-hidden="true">✱</span>
+          <span class="toplabel">Who we are</span>
+        </div>
 
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-title">Founder, Prefera</div>
-          <div class="timeline-date">2026 to present</div>
+        <div class="hero-figure reveal reveal-d2">
+          <div class="hero-mask">
+            <img src="/about-hero.jpg" alt="A clinician reading patient questions on a phone" loading="eager" width="1600" height="1067" />
+          </div>
         </div>
-        <div class="timeline-item">
-          <div class="timeline-title">Performance Marketing Specialist, 5CA</div>
-          <div class="timeline-date">2022 to 2025</div>
+
+        <div class="statsbar">
+          <div class="stats-left reveal reveal-d3">
+            <span class="stat"><strong>10+</strong> years of search and data</span>
+            <span class="stat-sep" aria-hidden="true">|</span>
+            <span class="stat"><strong>2</strong> years on AI citations</span>
+          </div>
+          <div class="stats-right">
+            <span class="stat-big reveal reveal-d4"><strong>1</strong> <span class="stat-caps">vertical only</span></span>
+            <span class="stat reveal reveal-d5"><strong>Utrecht</strong> studio</span>
+          </div>
         </div>
-        <div class="timeline-item">
-          <div class="timeline-title">Growth and Performance Marketing, Cocoroco</div>
-          <div class="timeline-date">2022 to 2023</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-title">Growth Marketer, Shatel Mobile</div>
-          <div class="timeline-date">2019 to 2021</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-title">Digital Marketing Specialist, Yara Information Technology</div>
-          <div class="timeline-date">2017 to 2018</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-title">Sales and marketing roles, Respina Networks and Shatel</div>
-          <div class="timeline-date">2012 to 2017</div>
+
+        <div class="line-grow" aria-hidden="true"></div>
+
+        <div class="intro-grid">
+          <div class="intro-copy">
+            <h1>
+              <span class="cut-reveal"><span>When AI recommends a clinic,</span></span>
+              <span class="cut-reveal cut-d1"><span class="h1-accent">is it yours?</span></span>
+            </h1>
+
+            <p class="body-p reveal">Someone is asking an AI for a clinic like yours right now. Not on Google. In ChatGPT, in Perplexity, in Gemini. They're typing "best place in [their city] for lip filler" and reading the three names the assistant hands back like a recommendation from a trusted friend.</p>
+
+            <p class="body-p reveal reveal-d1">If your clinic isn't one of them, you'll never know it happened. No missed-call notification, no empty enquiry form, nothing. Just a patient who trusted a machine, heard someone else's name, and booked there.</p>
+
+            <p class="body-p reveal reveal-d2">That's the gap Prefera closes. And it's a strange one, because the clinics losing this are often the good ones: real reputation, real reviews, years of excellent work, completely invisible to the systems now doing the recommending. Being brilliant offline stopped being enough the moment patients started asking AI first.</p>
+
+            <p class="body-p reveal reveal-d3">Prefera is a studio in Utrecht built for exactly this. Behind it is a senior team spanning ten years of search, performance marketing, and data across Europe, Asia, and Latin America, and deep product and engineering experience in e-commerce, payments, and AI. That mix matters: getting a clinic into AI answers is part marketing, part data, part technical, and we cover all three. For the last two years, all of it has pointed at one question: when AI recommends a clinic, is it yours?</p>
+          </div>
+
+          <aside class="cta-card reveal reveal-d4">
+            <p class="card-brand">Prefera</p>
+
+            <p class="card-label">Based in</p>
+            <p class="card-value">Utrecht, Netherlands</p>
+
+            <p class="card-label">Focus</p>
+            <p class="card-value">Aesthetic clinics, and nothing else.</p>
+
+            <div class="card-rule" aria-hidden="true"></div>
+
+            <p class="card-hook">Want a free audit? Book us.</p>
+            <p class="card-note">Fifteen minutes. We'll show you the exact queries where patients are being sent to someone else. No pitch, no commitment.</p>
+
+            <a href={bookUrl} class="cta-btn card-btn">
+              <span>Book your free audit</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+
+            <p class="card-micro">Worst case, you find out you're already winning.</p>
+          </aside>
         </div>
       </div>
+    </section>
 
-      <p>Campaigns run on Google, Meta, TikTok, and LinkedIn across EMEA, APAC, and LATAM markets. Analytics in Google Analytics and Looker Studio. Languages: English, Dutch, Farsi.</p>
+    <!-- ===== How we work ===== -->
+    <section class="how">
+      <div class="shell">
+        <div class="topbar reveal">
+          <span class="star" aria-hidden="true">✱</span>
+          <span class="toplabel">Our approach</span>
+        </div>
+        <h2 class="how-heading reveal reveal-d1">How we work</h2>
 
-      <p>Prefera is advised on product and technology by Max, a senior technical product manager with more than ten years in e-commerce, payments, and AI products.</p>
+        <div class="principle-grid">
+          {principles.map((p, i) => (
+            <article class={`principle-card reveal reveal-d${i + 2}`}>
+              <p class="principle-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}.</p>
+              <h3>{p.lead}</h3>
+              <p class="principle-body">{p.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
 
-      <a href="https://prefera.dev/book/?utm_source=website&utm_medium=cta&utm_campaign=about" class="btn-primary btn-accent">Book a free audit</a>
-    </div>
+    <!-- ===== The window ===== -->
+    <section class="window">
+      <div class="window-inner">
+        <span class="star star-center reveal" aria-hidden="true">✱</span>
+        <h2 class="window-heading reveal reveal-d1">This is the window,<br /> and it's closing.</h2>
+
+        <p class="window-p reveal reveal-d2">Right now AI recommends very few local clinics, so the field is nearly empty. That won't last. The clinics that show up first become the default answer, and defaults are almost impossible to unseat.</p>
+        <p class="window-p reveal reveal-d3">Every month you wait, a competitor can take the position that was going to be yours, and getting it back later costs far more than claiming it now.</p>
+
+        <div class="reveal reveal-d4">
+          <a href={bookUrl} class="cta-btn window-btn">
+            <span>Book your free audit</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <p class="window-micro">Fifteen minutes. No pitch, no commitment.</p>
+        </div>
+      </div>
+    </section>
   </main>
-  <Footer />
+  <Footer showCta={false} />
 </BaseLayout>
+
+<script>
+  // Page-scoped reveal system: mirrors the homepage observers but supports
+  // the cut-reveal and line-grow variants used only here.
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -60px 0px', threshold: 0.1 });
+
+  document.querySelectorAll('.reveal, .cut-reveal, .line-grow').forEach((el) => revealObserver.observe(el));
+</script>
 
 <style>
   .about-page {
-    background: var(--bg-primary);
-    min-height: 100vh;
-    padding: 6rem 1.5rem;
+    background: var(--bg-secondary);
   }
 
-  .about-wrapper {
-    max-width: 720px;
+  .shell {
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  /* ---- Reveal system (guarded for reduced motion) ---- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-d1 { transition-delay: 0.08s; }
+  .reveal-d2 { transition-delay: 0.16s; }
+  .reveal-d3 { transition-delay: 0.24s; }
+  .reveal-d4 { transition-delay: 0.32s; }
+  .reveal-d5 { transition-delay: 0.4s; }
+
+  .cut-reveal { display: block; overflow: hidden; }
+  .cut-reveal > span {
+    display: inline-block;
+    transform: translateY(110%);
+    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .cut-d1 > span { transition-delay: 0.12s; }
+  .cut-reveal.visible > span { transform: translateY(0); }
+
+  .line-grow {
+    width: 0;
+    height: 1px;
+    background: var(--border);
+    margin-bottom: 3rem;
+    transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .line-grow.visible { width: 100%; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .cut-reveal > span { opacity: 1; transform: none; transition: none; }
+    .line-grow { width: 100%; transition: none; }
+    .star { animation: none; }
+  }
+
+  /* ---- Shared bits ---- */
+  .star {
+    display: inline-block;
+    color: var(--accent);
+    font-size: 1.25rem;
+    line-height: 1;
+    animation: star-spin 12s linear infinite;
+  }
+  @keyframes star-spin { to { transform: rotate(360deg); } }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-bottom: 1.5rem;
+  }
+  .toplabel {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-tertiary);
+  }
+
+  .cta-btn {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.9rem 1.5rem;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .cta-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: left 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .cta-btn:hover::before { left: 0; }
+  .cta-btn > span,
+  .cta-btn svg {
+    position: relative;
+    z-index: 1;
+  }
+  .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px -8px rgba(95, 75, 139, 0.4); }
+  .cta-btn:active { transform: translateY(0) scale(0.98); }
+  @media (prefers-reduced-motion: reduce) {
+    .cta-btn, .cta-btn::before { transition: none; }
+  }
+
+  /* ---- Intro section ---- */
+  .intro { padding: 6.5rem 0 4.5rem; }
+
+  .hero-figure { margin-bottom: 1rem; }
+  .hero-mask {
+    clip-path: url(#clip-inverted);
+    -webkit-clip-path: url(#clip-inverted);
+  }
+  .hero-mask img {
+    width: 100%;
+    aspect-ratio: 100 / 40;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.94) saturate(0.85);
+  }
+
+  .statsbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
+    padding: 1.25rem 0;
+  }
+  .stats-left, .stats-right {
+    display: flex;
+    align-items: baseline;
+    gap: 1.25rem;
+  }
+  .stat {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    color: var(--text-tertiary);
+  }
+  .stat strong {
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 0.9375rem;
+    margin-right: 0.2rem;
+  }
+  .stat-sep { color: var(--border); }
+  .stat-big {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    color: var(--text-tertiary);
+  }
+  .stat-big strong {
+    font-family: 'Fraunces Variable', 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: 1.9rem;
+    color: var(--accent);
+    margin-right: 0.35rem;
+  }
+  .stat-caps { text-transform: uppercase; letter-spacing: 0.08em; }
+
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
   }
 
   h1 {
     font-family: 'Fraunces Variable', 'Fraunces', Georgia, serif;
-    font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 400;
+    font-size: clamp(2.1rem, 5.5vw, 3.6rem);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
     color: var(--text-primary);
-    margin-bottom: 2rem;
-    line-height: 1.2;
+    margin-bottom: 2.75rem;
+  }
+  .h1-accent {
+    font-style: italic;
+    color: var(--accent);
   }
 
-  .about-lead {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: var(--text-secondary);
-    margin-bottom: 3rem;
-  }
-
-  h2 {
-    font-family: 'Fraunces Variable', 'Fraunces', Georgia, serif;
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: var(--text-primary);
-    margin: 2.5rem 0 1.5rem;
-    line-height: 1.3;
-  }
-
-  .timeline {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    margin-bottom: 2rem;
-  }
-
-  .timeline-item {
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-  }
-
-  .timeline-item:last-child {
-    border-bottom: none;
-  }
-
-  .timeline-title {
+  .body-p {
     font-family: var(--font-sans);
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--text-primary);
-    flex: 1;
-  }
-
-  .timeline-date {
-    font-family: var(--font-sans);
-    font-size: 13px;
+    font-size: 0.9875rem;
+    line-height: 1.75;
     color: var(--text-secondary);
-    margin-left: 2rem;
-    text-align: right;
-    white-space: nowrap;
+    margin-bottom: 1.6rem;
+    max-width: 62ch;
   }
+  .body-p:last-child { margin-bottom: 0; }
 
-  p {
-    font-family: var(--font-sans);
-    font-size: 1rem;
-    line-height: 1.7;
-    color: var(--text-secondary);
+  /* ---- Sticky CTA card ---- */
+  .cta-card {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    align-self: start;
+  }
+  .card-brand {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
     margin-bottom: 1.5rem;
   }
-
-  .btn-primary {
-    margin-top: 2rem;
+  .card-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-tertiary);
+    margin-bottom: 0.25rem;
+  }
+  .card-value {
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 1.4rem;
+  }
+  .card-rule {
+    height: 1px;
+    background: var(--border);
+    margin: 0.5rem 0 1.5rem;
+  }
+  .card-hook {
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+  }
+  .card-note {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    color: var(--text-tertiary);
+    margin-bottom: 1.5rem;
+  }
+  .card-btn {
+    width: 100%;
+    background: var(--accent);
+    color: #fff;
+  }
+  .card-btn:hover { background: var(--accent-hover); }
+  .card-micro {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    color: var(--text-tertiary);
+    text-align: center;
+    margin-top: 0.9rem;
   }
 
-  @media (max-width: 640px) {
-    .about-page {
-      padding: 3rem 1.5rem;
-    }
+  /* ---- How we work ---- */
+  .how {
+    background: var(--bg-primary);
+    padding: 5rem 0 5.5rem;
+  }
+  .how-heading {
+    font-family: 'Fraunces Variable', 'Fraunces', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    margin: 0 0 3rem;
+  }
+  .principle-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .principle-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    transition: background 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .principle-card:hover {
+    background: #fff;
+    box-shadow: var(--shadow-elevated);
+  }
+  .principle-num {
+    font-family: 'Fraunces Variable', 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--accent);
+    margin: 0 0 1.5rem;
+  }
+  .principle-card h3 {
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 0.75rem;
+    line-height: 1.4;
+  }
+  .principle-body {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    margin: 0;
+  }
 
-    .timeline-date {
-      margin-left: 1rem;
+  /* ---- The window ---- */
+  .window {
+    background: var(--scroll-bg-cta);
+    padding: 5.5rem 1.25rem 6rem;
+    text-align: center;
+  }
+  .window-inner {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .star-center { font-size: 1.4rem; margin-bottom: 1.5rem; }
+  .window-heading {
+    font-family: 'Fraunces Variable', 'Fraunces', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2.1rem, 5.5vw, 3.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    color: #fff;
+    margin: 0 0 2.25rem;
+  }
+  .window-p {
+    font-family: var(--font-sans);
+    font-size: 0.9875rem;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.65);
+    max-width: 56ch;
+    margin: 0 auto 1.25rem;
+  }
+  .window-btn {
+    background: #fff;
+    color: var(--text-primary);
+    margin-top: 1.5rem;
+  }
+  .window-btn::before { background: rgba(95, 75, 139, 0.12); }
+  .window-micro {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.35);
+    margin-top: 1.25rem;
+  }
+
+  /* ---- Desktop ---- */
+  @media (min-width: 768px) {
+    .shell { padding: 0 2rem; }
+    .intro { padding: 8rem 0 6rem; }
+    .intro-grid {
+      grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+      gap: 4rem;
     }
+    .cta-card {
+      position: sticky;
+      top: 6rem;
+      padding: 2rem;
+    }
+    .principle-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.75rem;
+    }
+    .principle-card { padding: 2rem; }
+    .how { padding: 7rem 0; }
+    .window { padding: 7.5rem 1.25rem 8rem; }
   }
 </style>

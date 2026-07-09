@@ -2,7 +2,7 @@
 
 ## What this is
 prefera.dev is the marketing site for Prefera, a productized AEO/GEO service
-helping UK and EU independent aesthetic clinics gain visibility in AI-generated
+helping independent aesthetic clinics (UK, EU, US, Canada) gain visibility in AI-generated
 answers (ChatGPT, Perplexity, Gemini, Claude). Sole operator: Golnoosh Teymoori,
 based in Utrecht, NL.
 
@@ -23,7 +23,7 @@ based in Utrecht, NL.
 - The site sells AI visibility to clinics. It must practice what it preaches.
 
 ## Business context for content
-- ICP: owner-led, single-location, cash-pay UK aesthetic clinics
+- ICP: owner-led, single-location, cash-pay aesthetic clinics (UK, EU, US, Canada)
 - Lead magnet: free AI Visibility Read (audit PDF)
 - Pricing: EUR 490/mo Starter, EUR 1,190/mo Growth, EUR 2,500/mo Elite
 - Key differentiator: off-site authority building (not schema snake oil)

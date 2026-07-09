@@ -7,7 +7,11 @@ const slats = (n) =>
     h: 100 / n + 1,
     dir: i % 2 === 0 ? 'l' : 'r',
   }));
+// Pages that end in their own closing CTA (e.g. /about) pass showCta={false}
+// so the "Still invisible?" band doesn't stack on a second dark closer.
+const { showCta = true } = Astro.props;
 ---
+{showCta && (
 <section class="cta-section" data-scroll-bg="cta">
   <h2 class="blinds">Still invisible?
   </h2>
@@ -17,6 +21,7 @@ const slats = (n) =>
   </p>
   <a href="https://prefera.dev/book/?utm_source=website&utm_medium=cta&utm_campaign=footer-cta" class="cta-button">Book a free audit</a>
 </section>
+)}
 
 <footer class="footer" data-scroll-bg="footer">
   <div class="container">

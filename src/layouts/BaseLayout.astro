@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { faqs } from '../data/faqs.js';
+import { faqs, answerBlocks } from '../data/faqs.js';
 
 const {
   title = "AI visibility for aesthetic clinics | Prefera",
@@ -13,12 +13,14 @@ const canonical = new URL(Astro.url.pathname, siteUrl).href;
 const isHome = Astro.url.pathname === "/";
 const ogImage = `${siteUrl}/og-image.jpg`;
 // Freshness signal for AI/search. Bump when content materially changes.
-const lastUpdated = "2026-07-08";
+const lastUpdated = "2026-07-09";
 
 // FAQ structured data only belongs on the page that actually shows the FAQ.
+// The FAQ accordion plus the definitional Answers section, both visible on
+// the homepage, feed one FAQPage node (Google allows one per page).
 const faqPage = {
   "@type": "FAQPage",
-  "mainEntity": faqs.map(item => ({
+  "mainEntity": [...faqs, ...answerBlocks].map(item => ({
     "@type": "Question",
     "name": item.q,
     "acceptedAnswer": { "@type": "Answer", "text": item.a }
@@ -64,16 +66,27 @@ const jsonLd = {
       "@type": "LocalBusiness",
       "@id": `${siteUrl}/#localbusiness`,
       "name": "Prefera",
-      "description": "AI visibility (AEO) for independent aesthetic clinics in the UK and EU. Off-site authority building so AI assistants recommend your clinic.",
+      "description": "AI visibility (AEO) for independent aesthetic clinics across the UK, EU, US, and Canada. Off-site authority building so AI assistants recommend your clinic.",
       "address": { "@type": "PostalAddress", "addressLocality": "Utrecht", "addressCountry": "NL" },
-      "areaServed": ["GB", "EU"],
+      "areaServed": ["GB", "EU", "US", "CA"],
       "founder": { "@id": `${siteUrl}/#person` }
     },
     {
       "@type": "Service",
-      "serviceType": ["AI Search Visibility", "Answer Engine Optimization", "Local SEO"],
+      "serviceType": ["AI Search Visibility", "Answer Engine Optimization", "Local SEO", "Google Business Profile Management", "AI Voice Assistant"],
       "provider": { "@id": `${siteUrl}/#organization` },
-      "areaServed": ["GB", "EU"]
+      "areaServed": ["GB", "EU", "US", "CA"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Visibility services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Google Business Profile management", "description": "Complete, active profiles that rank in the local map pack: photos, posts, reviews, and categories, handled weekly." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Local SEO", "description": "Structured data, local citations, consistent NAP, review velocity, and city-level landing pages." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI search visibility", "description": "Making a business recognizable and citable by ChatGPT, Perplexity, and Google AI Overviews." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI voice assistant", "description": "Answers every call, books appointments into the calendar, and speaks the customer's language." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Search-ready websites", "description": "Fast Core Web Vitals, proper schema markup, location pages that rank, and content structured for search engines and AI crawlers." } }
+        ]
+      }
     },
     ...(isHome ? [faqPage] : [])
   ]
