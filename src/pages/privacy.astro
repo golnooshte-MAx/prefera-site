@@ -61,7 +61,8 @@ import Footer from '../components/Footer.astro';
 
   @media (max-width: 640px) {
     .legal-page {
-      padding: 3rem 1.5rem;
+      /* Top padding must clear the 72px fixed nav */
+      padding: 5.5rem 1.5rem 3rem;
     }
   }
 </style>
